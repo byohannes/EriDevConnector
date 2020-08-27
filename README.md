@@ -16,7 +16,7 @@ This project's aim is to connect software developers across several communities.
          secretOrKey: 'secret'
    };`
 - `npm install`
-- `npm run dev`
+- `npm run server`
  
  Server will be running on `http://localhost:5000`
 
