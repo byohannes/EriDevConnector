@@ -1,57 +1,81 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
+import axios from "axios";
 
 const Register = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
+    errors: {},
+  });
+
+  const { name, email, password, password2 } = formData;
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("/api/users/register", formData)
+      .then((res) => console.log(res.data))
+      .catch((err) => setFormData({ errors: err.response.data }));
+  };
   return (
-    <div className="register">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-8 m-auto">
-            <h1 className="display-4 text-center">Sign Up</h1>
-            <p className="lead text-center">Create your DevConnector account</p>
-            <form action="create-profile.html">
-              <div className="form-group">
-                <input
-                  type="text"
-                  className="form-control form-control-lg"
-                  placeholder="Name"
-                  name="name"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="email"
-                  className="form-control form-control-lg"
-                  placeholder="Email Address"
-                  name="email"
-                />
-                <small classNameName="form-text text-muted">
-                  This site uses Gravatar so if you want a profile image, use a
-                  Gravatar email
-                </small>
-              </div>
-              <div className="form-group">
-                <input
-                  type="password"
-                  className="form-control form-control-lg"
-                  placeholder="Password"
-                  name="password"
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  type="password"
-                  className="form-control form-control-lg"
-                  placeholder="Confirm Password"
-                  name="password2"
-                />
-              </div>
-              <input type="submit" className="btn btn-info btn-block mt-4" />
-            </form>
-          </div>
+    <Fragment>
+      <h1 className="large text-primary">Sign Up</h1>
+      <p className="lead">
+        <i className="fas fa-user" /> Create Your Account
+      </p>
+      <form className="form" onSubmit={onSubmit}>
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="Name"
+            name="name"
+            value={name}
+            onChange={onChange}
+          />
         </div>
-      </div>
-    </div>
+        <div className="form-group">
+          <input
+            type="email"
+            placeholder="Email Address"
+            name="email"
+            value={email}
+            onChange={onChange}
+          />
+          <small className="form-text">
+            This site uses Gravatar so if you want a profile image, use a
+            Gravatar email
+          </small>
+        </div>
+        <div className="form-group">
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={onChange}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            name="password2"
+            value={password2}
+            onChange={onChange}
+          />
+        </div>
+        <input type="submit" className="btn btn-primary" value="Register" />
+      </form>
+      <p className="my-1">
+        Already have an account?
+        {/* Already have an account? <Link to="/login">Sign In</Link> */}
+      </p>
+    </Fragment>
   );
 };
 
