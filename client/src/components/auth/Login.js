@@ -1,38 +1,54 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = formData;
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(email,password) 
+  };
   return (
-    <div classname="login">
-      <div classname="container">
-        <div classname="row">
-          <div classname="col-md-8 m-auto">
-            <h1 classname="display-4 text-center">Log In</h1>
-            <p classname="lead text-center">
-              Sign in to your DevConnector account
-            </p>
-            <form action="dashboard.html">
-              <div classname="form-group">
-                <input
-                  type="email"
-                  classname="form-control form-control-lg"
-                  placeholder="Email Address"
-                  name="email"
-                />
-              </div>
-              <div classname="form-group">
-                <input
-                  type="password"
-                  classname="form-control form-control-lg"
-                  placeholder="Password"
-                  name="password"
-                />
-              </div>
-              <input type="submit" classname="btn btn-info btn-block mt-4" />
-            </form>
-          </div>
+    <Fragment>
+      <h1 className="large text-primary">Sign In</h1>
+      <p className="lead">
+        <i className="fas fa-user" /> Sign Into Your Account
+      </p>
+      <form className="form" onSubmit={onSubmit}>
+        <div className="form-group">
+          <input
+            type="email"
+            placeholder="Email Address"
+            name="email"
+            value={email}
+            onChange={onChange}
+            required
+          />
         </div>
-      </div>
-    </div>
+        <div className="form-group">
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={onChange}
+            minLength="6"
+          />
+        </div>
+        <input type="submit" className="btn btn-primary" value="Login" />
+      </form>
+      <p className="my-1">
+      Don't have an account?
+        {/* Don't have an account? <Link to="/register">Sign Up</Link> */}
+      </p>
+    </Fragment>
   );
 };
 
