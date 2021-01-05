@@ -1,8 +1,8 @@
-import { TEST_DISPATCH } from "./../actions/types";
+import { TEST_DISPATCH } from './../actions/types';
 
 const initialState = {
   isAuthenticated: false,
-  user: null,
+  user: null
 };
 
 export default function auth(state = initialState, action) {
@@ -10,7 +10,7 @@ export default function auth(state = initialState, action) {
     case TEST_DISPATCH:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload
       };
     default:
       return state;
