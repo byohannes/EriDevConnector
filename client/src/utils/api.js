@@ -1,12 +1,12 @@
-import axios from "axios";
-import store from "../store";
-import { LOGOUT } from "../actions/types";
+import axios from 'axios';
+import store from '../store';
+import { LOGOUT } from '../actions/types';
 
 const api = axios.create({
-  baseURL: "/api",
+  baseURL: '/api',
   headers: {
-    "Content-Type": "application/json",
-  },
+    'Content-Type': 'application/json'
+  }
 });
 /**
  intercept any error responses from the api
